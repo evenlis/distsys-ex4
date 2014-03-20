@@ -5,7 +5,7 @@ class Probe extends Thread {
 
     private ArrayList transactionIdList;
     private ServerImpl server;
-    private int tId, sId;
+    private int transactionId, serverId;
 
     Probe(ServerImpl server, ArrayList transactionIdList, int transactionId, int serverId) {
         this.server = server;
@@ -15,10 +15,10 @@ class Probe extends Thread {
     }
 
     public void run() {
-        this.ids.add(this.tId);
-        this.server.println("Probing server "+this.ids, this.tId);
+        this.transactionIdList.add(this.transactionId);
+        this.server.println("Probing server "+this.transactionIdList, this.transactionId);
         try {
-            this.server.getServer(this.sId).probe(this.ids);
+            this.server.getServer(this.serverId).probe(this.transactionIdList);
         }
         catch (RemoteException err) {
         }
