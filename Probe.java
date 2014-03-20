@@ -3,15 +3,15 @@ import java.rmi.*;
 
 class Probe extends Thread {
 
-    private ArrayList ids;
+    private ArrayList transactionIdList;
     private ServerImpl server;
     private int tId, sId;
 
-    Probe(ServerImpl server, ArrayList ids, int tId, int sId) {
+    Probe(ServerImpl server, ArrayList transactionIdList, int transactionId, int serverId) {
         this.server = server;
-        this.ids = ids;
-        this.tId = tId;
-        this.sId = sId;
+        this.transactionIdList = transactionIdList;
+        this.transactionId = TransactionId;
+        this.serverId = serverId;
     }
 
     public void run() {
