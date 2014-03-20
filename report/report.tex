@@ -6,9 +6,9 @@
 \usepackage{mathtools}
 \usepackage{graphicx}
 %\usepackage{verbatim}
-%\usepackage[margin=25mm]{geometry}
-%\setlength{\parskip}{\medskipamount}
-%\setlength{\parindent}{0pt}
+%\usepackage[margin=39mm]{geometry}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
 
 \begin{document}
 \title{Øving 4}
@@ -17,12 +17,23 @@
 \maketitle
 
 \section*{Endringer}
-\subsection*{Timeout}
+Vi har lagt en ekstra fil: Probe.java, som inneholder ei liste med transaksjoner meldingen har blitt sendt til.
+I Resoruce.java har lock metoden blitt skrevet om for å takle både edge chasing og timeouts, med støtte for å enkelt kunne skrifte mellom de to måtene vi har implementert. 
 
-\subsection*{Edge chasing}
+Endringer i ServerImpl
+Endringer i Transaction
 
 \section*{Resultater}
+Se vedlagt fil med resultater. \\ 
+Resultatfila viser at alle casene ble løst???
 
 \section*{Implementering}
+\subsection*{Timeout}
+For å få til en timeout feature må man ta vare på tiden i en ressurs. En hver ressurs må da vente et gitt timeout intervall (gitt i inputfilene) før den eventuelt får låst ressursen. Hvis den ikke rekker å låse ressursen før den har gått ut på tid, får man da selvfølgelig ikke låst ressursen og må vente til neste gang for å prøve på nytt.
+
+\subsection*{Edge chasing}
+Edge chasing sender ut meldinger (probes) når en transaksjon skal vente på låsen til en ressurs. Denne proben sendes til transaksjonen som eier låsen akkurat nå. Hvis transaksjonen også venter på en lås, sendes proben til neste eier osv. Avslutningsvis endes proben hos en transaksjon som ikke venter på at en lås skal bli ledig, og vi har ingen vranglåser.
+
+
 
 \end{document}
