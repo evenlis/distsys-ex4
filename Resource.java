@@ -28,6 +28,9 @@ class Resource
    */
   synchronized boolean lock(int transactionId)
   {
+
+    long then = System.currentTimeMillis() + Globals.TIMEOUT_INTERVAL;
+
     if (lockOwner == transactionId) {
       System.err.println("Error: Transaction " + transactionId + " tried to lock a resource it already has locked!");
       return false;
@@ -35,7 +38,19 @@ class Resource
 
     while (lockOwner != NOT_LOCKED) {
       try {
-        wait();
+
+        if(Globals.PROBING_ENABLED) {
+          //TODO
+        } 
+
+        //timeout
+        else {
+          wait(Globals.TIMEOUT_INTERVAL);
+        }
+
+        if(then <= System.currentTimeMillis()) {
+          return false;
+        }
       } catch (InterruptedException ie) {
       }
     }
