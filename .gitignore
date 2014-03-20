@@ -1,2 +1,7 @@
 *.class
 *.txt
+*.aux
+*.fdb_latexmk*
+*.log
+*.pdf
+*.synctex*
