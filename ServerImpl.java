@@ -576,6 +576,11 @@ public class ServerImpl extends UnicastRemoteObject implements Server
 	return servers.get(id);
     }
 
+	public Integer getLockOwner(int resourceId) throws RemoteException {
+		Resource r = (Resource)resources.get(resourceId);
+		return r.getLockOwner();
+	}
+
     public void probe(ArrayList<Integer> transactions) throws RemoteException {
 	if(activeTransaction == null)
 	    return;
