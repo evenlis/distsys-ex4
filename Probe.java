@@ -16,7 +16,7 @@ class Probe extends Thread {
 
     public void run() {
         this.transactionIdList.add(this.transactionId);
-        this.server.println("Probing server "+this.transactionIdList, this.transactionId);
+	System.err.println("Sending probe to server "+transactionId);
         try {
             this.server.getServer(this.serverId).probe(this.transactionIdList);
         }
