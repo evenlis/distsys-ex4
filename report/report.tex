@@ -20,14 +20,14 @@
 Vi har lagt en ekstra fil: Probe.java, som inneholder ei liste med transaksjoner meldingen har blitt sendt til.
 I Resoruce.java har lock metoden blitt skrevet om for å takle både edge chasing og timeouts, med støtte for å enkelt kunne skrifte mellom de to måtene vi har implementert. 
 
-I ServerImpl.java har vi lagt til en probe metode som tar inn en liste som med transaksjoner som sjekker om den aktive transaksjonen finnes i lista fra før samt sender proben videre om nødvendig. Dette er den viktigste metoden i programmet, som tar seg av selve meldingsflyten mellom transaksjonene.
+I ServerImpl.java har vi lagt til en probe-metode som tar inn en liste som med transaksjoner som sjekker om den aktive transaksjonen finnes i lista fra før samt sender proben videre om nødvendig. Dette er den viktigste metoden i programmet, som tar seg av selve meldingsflyten mellom transaksjonene.
 
-I Transaction klassen har vi lagt til rollbackfunksjonen som avbryter holdingen av en lås. Denne metoden brukes av probefunksjonen i ServerImpl. 
+I Transaction klassen har vi lagt til resolveDeadlock-funksjonen som avbryter holdingen av en lås. Denne metoden brukes av probe-funksjonen i ServerImpl. 
 
 
 \section*{Resultater}
-Se vedlagt fil med resultater. \\ 
-Resultatfila viser at alle casene ble løst???
+Se vedlagt mappe med resultater. \\ \\
+Resultatfilene viser at edge chasing algoritmen vår løste alle casene. Algoritmen vår er naiv, slik at den første transaksjonen i den oppdagede sykelen må slippe sin lås.
 
 \section*{Implementering}
 \subsection*{Timeout}

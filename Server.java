@@ -54,4 +54,6 @@ public interface Server extends Remote
   void startTransactions() throws RemoteException;
 
   Integer getLockOwner(int resourceId) throws RemoteException;
+
+  void probe(HashSet<Integer> transactions) throws RemoteException;
 }
