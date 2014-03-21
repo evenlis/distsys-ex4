@@ -577,10 +577,10 @@ public class ServerImpl extends UnicastRemoteObject implements Server
     }
 
     public Integer getLockOwner(int resourceId) throws RemoteException {
-	(Resource)resources.get(resourceId).getLockOwner();
+	return ((Resource)resources.get(resourceId)).getLockOwner();
     }
 
-    public void probe(ArrayList<Integer> transactions) throws RemoteException {
+    public void probe(HashSet<Integer> transactions) throws RemoteException {
 	if(activeTransaction == null)
 	    return;
 	ResourceAccess pendingLock;
@@ -588,7 +588,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server
 	    return;
 
 	if(transactions.contains(activeTransaction.getId())){
-	    System.err.println("Deadlock detected, finxing...");
+	    System.err.println("Deadlock detected, fixing...");
 	} else {
 	    Integer transId;
 	    if((transId = pendingLock.server.getLockOwner(pendingLock.resourceId))==null)

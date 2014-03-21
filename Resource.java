@@ -1,4 +1,4 @@
-
+import java.util.HashSet;
 /**
  * A resource with an associated lock that can be held by only one transaction at a time.
  */
@@ -41,7 +41,7 @@ class Resource
 	    try {
 
 		if(Globals.PROBING_ENABLED) {
-		    Probe probe = new Probe(server, new ArrayList(), transactionId, server.getTransactionOwner(lockOwner));
+		    Probe probe = new Probe(server, new HashSet<Integer>(), transactionId, server.getTransactionOwner(lockOwner));
 		    probe.start();
 		}
 
