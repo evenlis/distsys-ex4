@@ -259,4 +259,12 @@ class Transaction
 	return transactionId;
     }
 
+    public synchronized void resolveDeadlock(){
+	if(waitingForResource != null){
+	    abortTransaction = true;
+	    waitingForResource = null;
+	    abort();
+	}
+    }
+
 }

@@ -588,7 +588,8 @@ public class ServerImpl extends UnicastRemoteObject implements Server
 	    return;
 
 	if(transactions.contains(activeTransaction.getId())){
-	    System.err.println("Deadlock detected, fixing...");
+	    System.err.println("Deadlock detected, resolving...");
+	    activeTransaction.resolveDeadlock();
 	} else {
 	    Integer transId;
 	    if((transId = pendingLock.server.getLockOwner(pendingLock.resourceId))==null)
